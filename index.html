@@ -223,56 +223,133 @@
     <section id="projects" class="projects">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Projetos</h2>
-                <p class="section-subtitle">Meus trabalhos e experimentos</p>
+                <span class="section-kicker">Portfólio</span>
+                <h2 class="section-title projects-title">Projetos em destaque</h2>
+                <p class="section-subtitle projects-subtitle">
+                    Projetos que mostram minha evolução em desenvolvimento web, back-end e mobile.
+                </p>
             </div>
 
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            <div class="code-icon">{ }</div>
-                        </div>
+                <article class="project-card featured-project">
+                    <div class="project-media">
+                        <!-- <img src="pictures/task-manager-preview.jpg" alt="Preview do sistema Task Manager"
+                            class="project-cover"> -->
+                        <div class="project-placeholder-modern">Task Manager</div>
+                        <span class="project-badge">Projeto Web</span>
                     </div>
+
                     <div class="project-content">
-                        <h3 class="project-title">Portfolio Pessoal</h3>
+                        <div class="project-top">
+                            <h3 class="project-title">Task Manager</h3>
+                            <span class="project-year">2026</span>
+                        </div>
+
                         <p class="project-description">
-                            Portfolio desenvolvido com HTML, CSS e JavaScript vanilla,
-                            focado em performance e design responsivo.
+                            Sistema para gerenciamento de tarefas com foco em organização, produtividade e operações
+                            CRUD completas.
                         </p>
+
+                        <ul class="project-highlights">
+                            <li>Cadastro, edição e remoção de tarefas.</li>
+                            <li>Integração com banco de dados.</li>
+                            <li>Estrutura pensada para organização e escalabilidade.</li>
+                        </ul>
+
                         <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">JSP</span>
+                            <span class="tech-tag">MySQL</span>
                             <span class="tech-tag">HTML</span>
                             <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
                         </div>
-                        <div class="project-status status status--info">Desenvolvido</div>
-                    </div>
-                </div>
 
-                <div class="project-card coming-soon">
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            <div class="coming-soon-icon">🧑‍💻</div>
+                        <div class="project-links">
+                            <a href="https://github.com/vitaoh/task-manager" target="_blank" rel="noopener noreferrer"
+                                class="btn btn--primary btn--sm">GitHub</a>
+                            <a href="#" class="btn btn--outline btn--sm">Ver demo</a>
                         </div>
                     </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-media">
+                        <!-- <img src="pictures/rededevs-preview.jpg" alt="Preview do projeto RedeDevs"
+                            class="project-cover"> -->
+                        <div class="project-placeholder-modern">RedeDevs</div>
+                        <span class="project-badge">Rede Social</span>
+                    </div>
+
                     <div class="project-content">
-                        <h3 class="project-title">Projetos</h3>
+                        <div class="project-top">
+                            <h3 class="project-title">RedeDevs</h3>
+                            <span class="project-year">2026</span>
+                        </div>
+
                         <p class="project-description">
-                            Projetos desenvolvidos e em desenvolvimento com Java, JavaScript, HTML, CSS e MySQL.
+                            Plataforma com proposta de conexão entre desenvolvedores, comunidades e colaboração entre
+                            perfis técnicos.
                         </p>
-                        <ul class="project-list">
-                            <li><a href="https://github.com/vitaoh/task-manager" target="_blank"
-                                    rel="noopener noreferrer">📝 Gerenciamento de Tarefas</a></li>
-                            <li><a href="https://github.com/vitaoh/RedeDevsV2/" target="_blank"
-                                    rel="noopener noreferrer">🌐 RedeDevs</a></li>
-                            <li><a href="https://github.com/vitaoh/PokemonShowdown/" target="_blank"
-                                    rel="noopener noreferrer">🎮 PokemonShowdown</a></li>
+
+                        <ul class="project-highlights">
+                            <li>Estrutura social com foco em comunidade.</li>
+                            <li>Organização de interface e navegação.</li>
+                            <li>Projeto voltado para evolução contínua.</li>
                         </ul>
-                        <div class="project-status status status--info">Desenvolvido</div>
+
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">CSS</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/vitaoh/RedeDevsV2" target="_blank" rel="noopener noreferrer"
+                                class="btn btn--primary btn--sm">GitHub</a>
+                            <a href="#" class="btn btn--outline btn--sm">Detalhes</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-media">
+                        <!-- <img src="pictures/pokemon-preview.jpg" alt="Preview do projeto Pokemon Showdown"
+                            class="project-cover"> -->
+                              <div class="project-placeholder-modern">Pokemon Showdown</div>
+                        <span class="project-badge">Jogo</span>
                     </div>
 
-                </div>
+                    <div class="project-content">
+                        <div class="project-top">
+                            <h3 class="project-title">Pokemon Showdown</h3>
+                            <span class="project-year">2026</span>
+                        </div>
 
+                        <p class="project-description">
+                            Projeto experimental com foco em interface, lógica e adaptação de funcionalidades inspiradas
+                            em batalhas e interação.
+                        </p>
+
+                        <ul class="project-highlights">
+                            <li>Exploração de lógica e organização de componentes.</li>
+                            <li>Desenvolvimento voltado para prática e aprendizado.</li>
+                            <li>Boa peça para mostrar versatilidade técnica.</li>
+                        </ul>
+
+                        <div class="project-tech">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/vitaoh/PokemonShowdown" target="_blank"
+                                rel="noopener noreferrer" class="btn btn--primary btn--sm">GitHub</a>
+                            <a href="#" class="btn btn--outline btn--sm">Ver mais</a>
+                        </div>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
