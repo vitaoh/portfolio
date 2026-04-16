@@ -28,26 +28,8 @@ O portfólio apresenta as seguintes seções em ordem de navegação:
 
 ## Como visualizar o portfólio
 
-Para ver o portfólio localmente, abra o arquivo `home.html` no seu navegador favorito. Recomenda-se utilizar um servidor local para evitar limitações do navegador com recursos locais.
-
-### Opções de servidor local:
-
-**Com Python:**
-```bash
-python -m http.server 8000
-```
-
-**Com Node.js:**
-```bash
-npx http-server -p 8000
-```
-
-**Com PHP:**
-```bash
-php -S localhost:8000
-```
-
-Acesse: `http://localhost:8000/home.html`
+Para ver o portfólio, basta clicar nesse link.
+<a href="https://victorherculini.vercel.app/" target="_blank">Visualizar portfólio</a>
 
 ## Estrutura dos Arquivos
 
@@ -61,7 +43,7 @@ Acesse: `http://localhost:8000/home.html`
 
 ## Contatos
 
-- **Email**: herculinvictorr@gmail.com
+- **Email**: vrherculini@gmail.com
 - **Telefone**: (16) 99785-8363
 - **Redes sociais**: Links disponíveis na seção de contato do portfólio
 
