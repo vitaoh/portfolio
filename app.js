@@ -1,515 +1,491 @@
+'use strict';
+
+/* =============================================================
+   VICTOR HERCULINI — Portfolio · app.js
+   ============================================================= */
+
 class Portfolio {
-    constructor() {
-        this.navbar = document.getElementById('navbar');
-        this.navToggle = document.getElementById('nav-toggle');
-        this.navMenu = document.getElementById('nav-menu');
-        this.navLinks = document.querySelectorAll('.nav-link');
-        this.contactForm = document.getElementById('contact-form');
-        this.isMenuOpen = false;
+  constructor() {
+    this.navbar      = document.getElementById('navbar');
+    this.navToggle   = document.getElementById('nav-toggle');
+    this.navMenu     = document.getElementById('nav-menu');
+    this.navLinks    = document.querySelectorAll('.nav-link');
+    this.contactForm = document.getElementById('contact-form');
+    this.isMenuOpen  = false;
+    this.skillsAnimated = false;
 
-        this.init();
+    this.init();
+  }
+
+  /* ── INIT ──────────────────────────────────────────────────── */
+  init() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => this.setupAll());
+    } else {
+      this.setupAll();
+    }
+  }
+
+  setupAll() {
+    this.setupNavigation();
+    this.setupScrollEffects();
+    this.setupFadeObserver();
+    this.setupSkillsAnimation();
+    this.setupCarousel();
+    this.setupImageCarousels();
+    this.setupContactForm();
+    this.setupSmoothScrolling();
+    this.setupTypingAnimation();
+  }
+
+  /* ── NAVEGAÇÃO ─────────────────────────────────────────────── */
+  setupNavigation() {
+    if (!this.navToggle || !this.navMenu) return;
+
+    this.navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.isMenuOpen = !this.isMenuOpen;
+      this.navMenu.classList.toggle('active', this.isMenuOpen);
+      this.navToggle.classList.toggle('active', this.isMenuOpen);
+      document.body.style.overflow = this.isMenuOpen ? 'hidden' : '';
+    });
+
+    this.navLinks.forEach(link => link.addEventListener('click', () => this.closeMenu()));
+
+    document.addEventListener('click', (e) => {
+      if (this.isMenuOpen && !this.navbar.contains(e.target)) this.closeMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.isMenuOpen) this.closeMenu();
+    });
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
+    this.navMenu.classList.remove('active');
+    this.navToggle.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /* ── EFEITOS DE SCROLL ─────────────────────────────────────── */
+  setupScrollEffects() {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          this.navbar.classList.toggle('scrolled', window.scrollY > 50);
+          this.updateActiveNavLink();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+
+  updateActiveNavLink() {
+    const scrollPos = window.scrollY + 100;
+    let activeId = null;
+
+    document.querySelectorAll('section[id]').forEach(sec => {
+      if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
+        activeId = sec.id;
+      }
+    });
+
+    this.navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${activeId}`);
+    });
+  }
+
+  /* ── OBSERVER FADE-IN ──────────────────────────────────────── */
+  setupFadeObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        if (entry.target.classList.contains('skills-section')) this.animateSkills();
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  }
+
+  /* ── ANIMAÇÃO DAS HABILIDADES ──────────────────────────────── */
+  setupSkillsAnimation() { this.skillsAnimated = false; }
+
+  animateSkills() {
+    if (this.skillsAnimated) return;
+    this.skillsAnimated = true;
+    document.querySelectorAll('.skill-progress').forEach((bar, i) => {
+      setTimeout(() => {
+        bar.style.width = `${bar.getAttribute('data-width')}%`;
+      }, i * 180);
+    });
+  }
+
+  /* ── CARROSSEL PRINCIPAL (slides de projeto) ───────────────── */
+  setupCarousel() {
+    const track     = document.getElementById('carousel-track');
+    const slides    = document.querySelectorAll('.carousel-slide');
+    const prevBtn   = document.getElementById('carousel-prev');
+    const nextBtn   = document.getElementById('carousel-next');
+    const viewport  = document.getElementById('carousel-viewport');
+    const currentEl = document.getElementById('carousel-current');
+    const totalEl   = document.getElementById('carousel-total');
+
+    if (!track || !slides.length) return;
+
+    const total = slides.length;
+    let current = 0;
+    let touchStartX = 0;
+
+    // Autoplay: avança a cada 6 segundos
+    const AUTOPLAY_DELAY = 6000;
+    let autoTimer = null;
+
+    const startAutoplay = () => {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(current + 1), AUTOPLAY_DELAY);
+    };
+    const stopAutoplay = () => clearInterval(autoTimer);
+
+    if (totalEl) totalEl.textContent = total;
+
+    const goTo = (index) => {
+      current = ((index % total) + total) % total;
+
+      // Move o track via translateX
+      track.style.transform = `translateX(-${current * 100}%)`;
+
+      // Atualiza dots principais
+      document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        const active = i === current;
+        dot.classList.toggle('active', active);
+        dot.setAttribute('aria-selected', String(active));
+      });
+
+      // aria-hidden nos slides
+      slides.forEach((slide, i) => {
+        slide.setAttribute('aria-hidden', String(i !== current));
+      });
+
+      if (currentEl) currentEl.textContent = current + 1;
+    };
+
+    // Botões de seta
+    if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); startAutoplay(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); startAutoplay(); });
+
+    // Dots
+    document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+      dot.addEventListener('click', () => { goTo(i); startAutoplay(); });
+    });
+
+    // Pausa o autoplay ao hover
+    if (viewport) {
+      viewport.addEventListener('mouseenter', stopAutoplay);
+      viewport.addEventListener('mouseleave', startAutoplay);
     }
 
-    init() {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                this.setupAll();
-            });
+    // Navegação por teclado (←/→) quando seção visível
+    document.addEventListener('keydown', (e) => {
+      const section = document.getElementById('projects');
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      if (rect.top > window.innerHeight || rect.bottom < 0) return;
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); startAutoplay(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); startAutoplay(); }
+    });
+
+    // Swipe tátil
+    if (viewport) {
+      viewport.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', (e) => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          diff > 0 ? goTo(current + 1) : goTo(current - 1);
+          startAutoplay();
+        }
+      }, { passive: true });
+    }
+
+    goTo(0);
+    startAutoplay();
+  }
+
+  /* ── MINI CARROSSEIS DE IMAGEM ─────────────────────────────── */
+  setupImageCarousels() {
+    document.querySelectorAll('[data-img-carousel]').forEach(carousel => {
+      const track    = carousel.querySelector('.img-carousel-track');
+      const slides   = carousel.querySelectorAll('.img-carousel-slide');
+      const prevBtn  = carousel.querySelector('.img-carousel-prev');
+      const nextBtn  = carousel.querySelector('.img-carousel-next');
+      const dotsWrap = carousel.querySelector('.img-dots');
+      const images   = carousel.querySelectorAll('img');
+
+      if (!track || !slides.length) return;
+
+      const total = slides.length;
+      let current = 0;
+      let startX  = 0;
+      let loadedCount = 0;
+      let imgTimer = null;
+
+      // Gera dots dinamicamente
+      if (dotsWrap) {
+        dotsWrap.innerHTML = '';
+        for (let i = 0; i < total; i++) {
+          const dot = document.createElement('button');
+          dot.className = 'img-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('role', 'tab');
+          dot.setAttribute('aria-label', `Imagem ${i + 1}`);
+          dot.addEventListener('click', (e) => { e.stopPropagation(); goTo(i); restartAuto(); });
+          dotsWrap.appendChild(dot);
+        }
+      }
+
+      const goTo = (index) => {
+        current = ((index % total) + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        carousel.querySelectorAll('.img-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === current);
+          dot.setAttribute('aria-selected', String(i === current));
+        });
+      };
+
+      // Autoplay interno: troca imagem a cada 3.5 s
+      const IMG_DELAY = 3500;
+      const startAuto   = () => { clearInterval(imgTimer); imgTimer = setInterval(() => goTo(current + 1), IMG_DELAY); };
+      const stopAuto    = () => clearInterval(imgTimer);
+      const restartAuto = () => startAuto();
+
+      // Pausa ao hover
+      carousel.addEventListener('mouseenter', stopAuto);
+      carousel.addEventListener('mouseleave', startAuto);
+
+      // Botões prev/next
+      if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(current - 1); restartAuto(); });
+      if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(current + 1); restartAuto(); });
+
+      // Swipe
+      carousel.addEventListener('touchstart', (e) => { startX = e.changedTouches[0].clientX; }, { passive: true });
+      carousel.addEventListener('touchend', (e) => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { diff > 0 ? goTo(current + 1) : goTo(current - 1); restartAuto(); }
+      }, { passive: true });
+
+      // Detecta imagens carregadas — revela carrossel sobre mockup
+      const onImageLoad = () => {
+        loadedCount++;
+        if (loadedCount === 1) {
+          // Primeira imagem OK → mostra carrossel
+          carousel.classList.add('has-images');
+          startAuto();
+        }
+      };
+
+      images.forEach(img => {
+        if (img.complete && img.naturalWidth > 0) {
+          onImageLoad();
         } else {
-            this.setupAll();
+          img.addEventListener('load', onImageLoad, { once: true });
+          // Se falhar, não conta → mockup permanece visível
         }
-    }
+      });
 
-    setupAll() {
-        this.setupNavigation();
-        this.setupScrollEffects();
-        this.setupIntersectionObserver();
-        this.setupContactForm();
-        this.setupSkillsAnimation();
-        this.setupSmoothScrolling();
-        this.setupTypingAnimation();
-        console.log('Portfolio initialized successfully');
-    }
+      goTo(0);
+    });
+  }
 
-    setupNavigation() {
-        if (!this.navToggle || !this.navMenu) {
-            console.error('Navigation elements not found');
-            return;
+  /* ── SCROLL SUAVE ──────────────────────────────────────────── */
+  setupSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+          this.closeMenu();
         }
+      });
+    });
+  }
 
-        this.navToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
+  /* ── EFEITO DE DIGITAÇÃO ───────────────────────────────────── */
+  setupTypingAnimation() {
+    const el = document.querySelector('.typing-text');
+    if (!el) return;
 
-            console.log('Toggle clicked, current state:', this.isMenuOpen);
+    const text = el.textContent;
+    el.textContent = '';
 
-            this.isMenuOpen = !this.isMenuOpen;
+    let i = 0;
+    const type = () => {
+      if (i < text.length) {
+        el.textContent += text.charAt(i++);
+        setTimeout(type, 95);
+      } else {
+        setTimeout(() => { el.style.borderRight = 'none'; }, 1200);
+      }
+    };
 
-            if (this.isMenuOpen) {
-                this.navMenu.classList.add('active');
-                this.navToggle.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            } else {
-                this.navMenu.classList.remove('active');
-                this.navToggle.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
+    setTimeout(type, 1200);
+  }
 
-        this.navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                this.closeMenu();
-            });
-        });
+  /* ── FORMULÁRIO DE CONTATO ─────────────────────────────────── */
+  setupContactForm() {
+    if (!this.contactForm) return;
 
-        document.addEventListener('click', (e) => {
-            if (this.isMenuOpen && !this.navbar.contains(e.target)) {
-                this.closeMenu();
-            }
-        });
+    this.contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this.contactForm));
+      if (this.validateForm(data)) this.submitForm(data);
+    });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.isMenuOpen) {
-                this.closeMenu();
-            }
-        });
+    this.contactForm.querySelectorAll('input, textarea').forEach(input => {
+      input.addEventListener('blur', () => this.validateField(input));
+      input.addEventListener('input', () => {
+        input.classList.remove('error');
+        this.removeFieldError(input);
+      });
+    });
+  }
+
+  validateForm(data) {
+    let ok = true;
+    this.clearFormErrors();
+
+    if (!data.name || data.name.trim().length < 2) {
+      this.showFieldError('name', 'Nome deve ter pelo menos 2 caracteres');
+      ok = false;
     }
-
-    closeMenu() {
-        this.isMenuOpen = false;
-        this.navMenu.classList.remove('active');
-        this.navToggle.classList.remove('active');
-        document.body.style.overflow = '';
+    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      this.showFieldError('email', 'Por favor, insira um email válido');
+      ok = false;
     }
-
-    setupScrollEffects() {
-        let ticking = false;
-
-        const updateNavbar = () => {
-            const currentScrollY = window.scrollY;
-
-            if (currentScrollY > 50) {
-                this.navbar.classList.add('scrolled');
-            } else {
-                this.navbar.classList.remove('scrolled');
-            }
-
-            this.updateActiveNavLink();
-
-            ticking = false;
-        };
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(updateNavbar);
-                ticking = true;
-            }
-        });
+    if (!data.subject || data.subject.trim().length < 3) {
+      this.showFieldError('subject', 'Assunto deve ter pelo menos 3 caracteres');
+      ok = false;
     }
-
-    updateActiveNavLink() {
-        const sections = document.querySelectorAll('section[id]');
-        const scrollPosition = window.scrollY + 100;
-        let activeSection = null;
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                activeSection = sectionId;
-            }
-        });
-
-        this.navLinks.forEach(link => {
-            link.classList.remove('active');
-            const href = link.getAttribute('href');
-            if (href === `#${activeSection}`) {
-                link.classList.add('active');
-            }
-        });
+    if (!data.message || data.message.trim().length < 10) {
+      this.showFieldError('message', 'Mensagem deve ter pelo menos 10 caracteres');
+      ok = false;
     }
+    return ok;
+  }
 
-    setupIntersectionObserver() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+  validateField(field) {
+    const val = field.value.trim();
+    const checks = {
+      name:    () => val.length < 2  && 'Nome deve ter pelo menos 2 caracteres',
+      email:   () => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) && 'Por favor, insira um email válido',
+      subject: () => val.length < 3  && 'Assunto deve ter pelo menos 3 caracteres',
+      message: () => val.length < 10 && 'Mensagem deve ter pelo menos 10 caracteres',
+    };
+    const check = checks[field.name];
+    const msg = check && check();
+    if (msg) { this.showFieldError(field.name, msg); return false; }
+    this.removeFieldError(field);
+    return true;
+  }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+  showFieldError(fieldName, message) {
+    const field = document.getElementById(fieldName);
+    if (!field) return;
+    field.classList.add('error');
+    const group = field.closest('.form-group');
+    group.querySelector('.error-message')?.remove();
+    const span = document.createElement('span');
+    span.className = 'error-message';
+    span.textContent = message;
+    group.appendChild(span);
+  }
 
-                    if (entry.target.classList.contains('skills-section')) {
-                        this.animateSkills();
-                    }
-                }
-            });
-        }, observerOptions);
+  removeFieldError(field) {
+    field.closest('.form-group')?.querySelector('.error-message')?.remove();
+    field.classList.remove('error');
+  }
 
-        const animatedElements = document.querySelectorAll('.about-card, .vision-goal, .project-card, .skills-section, .contact-item');
+  clearFormErrors() {
+    this.contactForm.querySelectorAll('.error-message').forEach(e => e.remove());
+    this.contactForm.querySelectorAll('.error').forEach(f => f.classList.remove('error'));
+  }
 
-        animatedElements.forEach((element, index) => {
-            if (element.classList.contains('about-card')) {
-                element.classList.add('fade-in');
-                element.style.animationDelay = `${index * 0.2}s`;
-            } else if (element.classList.contains('vision-goal')) {
-                element.classList.add('fade-in');
-                element.style.animationDelay = `${index * 0.3}s`;
-            } else if (element.classList.contains('project-card')) {
-                element.classList.add('slide-in-left');
-                element.style.animationDelay = `${index * 0.2}s`;
-            } else if (element.classList.contains('contact-item')) {
-                element.classList.add('slide-in-right');
-                element.style.animationDelay = `${index * 0.1}s`;
-            } else {
-                element.classList.add('fade-in');
-            }
+  async submitForm(data) {
+    const btn  = this.contactForm.querySelector('button[type="submit"]');
+    const orig = btn.innerHTML;
 
-            observer.observe(element);
-        });
+    btn.textContent = 'Enviando…';
+    btn.disabled = true;
+
+    try {
+      this.showFormMessage('✅ Formulário validado! Redirecionando para seu cliente de email…', 'success');
+      await new Promise(r => setTimeout(r, 1000));
+
+      const subject = encodeURIComponent(data.subject);
+      const body    = encodeURIComponent(
+        `Olá Victor!\n\nNome: ${data.name}\nEmail: ${data.email}\n\nMensagem:\n${data.message}\n\n---\nEnviado pelo portfólio`
+      );
+      window.location.href = `mailto:herculinvictorr@gmail.com?subject=${subject}&body=${body}`;
+
+      setTimeout(() => {
+        this.contactForm.reset();
+        this.showFormMessage('📧 Cliente de email aberto! Caso não abra, envie para: herculinvictorr@gmail.com', 'success');
+      }, 2000);
+
+    } catch (err) {
+      this.showFormMessage('❌ Erro ao processar. Contato direto: herculinvictorr@gmail.com', 'error');
+    } finally {
+      setTimeout(() => { btn.innerHTML = orig; btn.disabled = false; }, 2000);
     }
+  }
 
-    setupSkillsAnimation() {
-        this.skillsAnimated = false;
-    }
+  showFormMessage(message, type) {
+    this.contactForm.querySelector('.form-message')?.remove();
+    const div = document.createElement('div');
+    div.className = `form-message form-message--${type}`;
+    div.textContent = message;
+    this.contactForm.insertBefore(div, this.contactForm.firstChild);
+    div.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-    animateSkills() {
-        if (this.skillsAnimated) return;
-
-        const skillBars = document.querySelectorAll('.skill-progress');
-
-        skillBars.forEach((bar, index) => {
-            const width = bar.getAttribute('data-width');
-
-            setTimeout(() => {
-                bar.style.width = `${width}%`;
-                bar.setAttribute('data-animated', 'true');
-            }, index * 200);
-        });
-
-        this.skillsAnimated = true;
-    }
-
-    setupSmoothScrolling() {
-        const anchorLinks = document.querySelectorAll('a[href^="#"]');
-
-        anchorLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                const targetId = link.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-
-                if (targetSection) {
-                    e.preventDefault();
-
-                    const headerOffset = 80;
-                    const elementPosition = targetSection.offsetTop;
-                    const offsetPosition = elementPosition - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-
-                    this.closeMenu();
-
-                    console.log(`Scrolling to ${targetId}`);
-                }
-            });
-        });
-    }
-
-    setupTypingAnimation() {
-        const typingElement = document.querySelector('.typing-text');
-        if (!typingElement) return;
-
-        const text = typingElement.textContent;
-        typingElement.textContent = '';
-
-        let i = 0;
-        const typeWriter = () => {
-            if (i < text.length) {
-                typingElement.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            } else {
-                setTimeout(() => {
-                    typingElement.style.borderRight = 'none';
-                }, 1000);
-            }
-        };
-
-        setTimeout(typeWriter, 1500);
-    }
-
-    setupContactForm() {
-        if (!this.contactForm) {
-            console.error('Contact form not found');
-            return;
-        }
-
-        this.contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const formData = new FormData(this.contactForm);
-            const data = Object.fromEntries(formData);
-
-            if (this.validateForm(data)) {
-                this.submitForm(data);
-            }
-        });
-
-        const inputs = this.contactForm.querySelectorAll('input, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('blur', () => {
-                this.validateField(input);
-            });
-
-            input.addEventListener('input', () => {
-                input.classList.remove('error');
-                this.removeFieldError(input);
-            });
-        });
-    }
-
-    validateForm(data) {
-        let isValid = true;
-
-        this.clearFormErrors();
-
-        if (!data.name || data.name.trim().length < 2) {
-            this.showFieldError('name', 'Nome deve ter pelo menos 2 caracteres');
-            isValid = false;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!data.email || !emailRegex.test(data.email)) {
-            this.showFieldError('email', 'Por favor, insira um email válido');
-            isValid = false;
-        }
-
-        if (!data.subject || data.subject.trim().length < 3) {
-            this.showFieldError('subject', 'Assunto deve ter pelo menos 3 caracteres');
-            isValid = false;
-        }
-
-        if (!data.message || data.message.trim().length < 10) {
-            this.showFieldError('message', 'Mensagem deve ter pelo menos 10 caracteres');
-            isValid = false;
-        }
-
-        return isValid;
-    }
-
-    validateField(field) {
-        const value = field.value.trim();
-        const fieldName = field.name;
-
-        switch (fieldName) {
-            case 'name':
-                if (value.length < 2) {
-                    this.showFieldError(fieldName, 'Nome deve ter pelo menos 2 caracteres');
-                    return false;
-                }
-                break;
-            case 'email':
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(value)) {
-                    this.showFieldError(fieldName, 'Por favor, insira um email válido');
-                    return false;
-                }
-                break;
-            case 'subject':
-                if (value.length < 3) {
-                    this.showFieldError(fieldName, 'Assunto deve ter pelo menos 3 caracteres');
-                    return false;
-                }
-                break;
-            case 'message':
-                if (value.length < 10) {
-                    this.showFieldError(fieldName, 'Mensagem deve ter pelo menos 10 caracteres');
-                    return false;
-                }
-                break;
-        }
-
-        this.removeFieldError(field);
-        return true;
-    }
-
-    showFieldError(fieldName, message) {
-        const field = document.getElementById(fieldName);
-        const formGroup = field.closest('.form-group');
-
-        field.classList.add('error');
-
-        const existingError = formGroup.querySelector('.error-message');
-        if (existingError) {
-            existingError.remove();
-        }
-
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
-        errorDiv.textContent = message;
-        errorDiv.style.color = 'var(--color-error)';
-        errorDiv.style.fontSize = 'var(--font-size-sm)';
-        errorDiv.style.marginTop = 'var(--space-4)';
-
-        formGroup.appendChild(errorDiv);
-    }
-
-    removeFieldError(field) {
-        const formGroup = field.closest('.form-group');
-        const errorMessage = formGroup.querySelector('.error-message');
-
-        if (errorMessage) {
-            errorMessage.remove();
-        }
-
-        field.classList.remove('error');
-    }
-
-    clearFormErrors() {
-        const errorMessages = this.contactForm.querySelectorAll('.error-message');
-        const errorFields = this.contactForm.querySelectorAll('.error');
-
-        errorMessages.forEach(error => error.remove());
-        errorFields.forEach(field => field.classList.remove('error'));
-    }
-
-    async submitForm(data) {
-        const submitBtn = this.contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-
-        submitBtn.textContent = 'Enviando...';
-        submitBtn.disabled = true;
-
-        try {
-            this.showSuccessMessage('✅ Formulário validado com sucesso! Redirecionando para seu cliente de email...');
-
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-            const subject = encodeURIComponent(data.subject);
-            const body = encodeURIComponent(
-                `Olá Victor!\n\n` +
-                `Nome: ${data.name}\n` +
-                `Email: ${data.email}\n\n` +
-                `Mensagem:\n${data.message}\n\n` +
-                `---\n` +
-                `Enviado através do seu portfólio`
-            );
-            const mailtoLink = `mailto:herculinvictorr@gmail.com?subject=${subject}&body=${body}`;
-
-            window.location.href = mailtoLink;
-
-            setTimeout(() => {
-                this.contactForm.reset();
-                this.showSuccessMessage('📧 Cliente de email aberto! Se não abriu automaticamente, envie um email para: herculinvictorr@gmail.com');
-            }, 2000);
-
-        } catch (error) {
-            console.error('Form submission error:', error);
-            this.showErrorMessage('❌ Erro ao processar o formulário. Entre em contato diretamente: [herculinvictorr@gmail.com](mailto:herculinvictorr@gmail.com) ou (16) 99785-8363');
-        } finally {
-            setTimeout(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        }
-    }
-
-    showSuccessMessage(message) {
-        this.showFormMessage(message, 'success');
-    }
-
-    showErrorMessage(message) {
-        this.showFormMessage(message, 'error');
-    }
-
-    showFormMessage(message, type) {
-        const existingMessage = this.contactForm.querySelector('.form-message');
-        if (existingMessage) {
-            existingMessage.remove();
-        }
-
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `form-message status status--${type}`;
-        messageDiv.innerHTML = message;
-        messageDiv.style.marginBottom = 'var(--space-16)';
-        messageDiv.style.padding = 'var(--space-12)';
-        messageDiv.style.borderRadius = 'var(--radius-base)';
-        messageDiv.style.fontWeight = 'var(--font-weight-medium)';
-
-        this.contactForm.insertBefore(messageDiv, this.contactForm.firstChild);
-
-        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        const timeout = type === 'success' ? 8000 : 10000;
-        setTimeout(() => {
-            if (messageDiv.parentNode) {
-                messageDiv.style.opacity = '0';
-                messageDiv.style.transform = 'translateY(-10px)';
-                setTimeout(() => {
-                    if (messageDiv.parentNode) {
-                        messageDiv.remove();
-                    }
-                }, 300);
-            }
-        }, timeout);
-    }
+    const delay = type === 'success' ? 8000 : 10000;
+    setTimeout(() => {
+      div.style.opacity = '0';
+      div.style.transform = 'translateY(-8px)';
+      div.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      setTimeout(() => div.remove(), 320);
+    }, delay);
+  }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing portfolio...');
-    const portfolio = new Portfolio();
+/* ── INICIALIZAÇÃO ─────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => new Portfolio());
 
-    window.addEventListener('error', (event) => {
-        console.error('Global error:', event.error);
-    });
-
-    window.addEventListener('unhandledrejection', (event) => {
-        console.error('Unhandled promise rejection:', event.reason);
-    });
-});
-
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-        const animatedElements = document.querySelectorAll('[style*="animation"]');
-        animatedElements.forEach(el => {
-            el.style.animationPlayState = 'paused';
-        });
-    } else {
-        const animatedElements = document.querySelectorAll('[style*="animation"]');
-        animatedElements.forEach(el => {
-            el.style.animationPlayState = 'running';
-        });
-    }
-});
-
-let resizeTimeout;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-        const navMenu = document.getElementById('nav-menu');
-        const navToggle = document.getElementById('nav-toggle');
-
-        if (window.innerWidth > 768 && navMenu && navToggle) {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+/* Fecha o menu ao redimensionar para desktop */
+window.addEventListener('resize', (() => {
+  let timer;
+  return () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      if (window.innerWidth > 768) {
+        document.getElementById('nav-menu')?.classList.remove('active');
+        document.getElementById('nav-toggle')?.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     }, 250);
+  };
+})());
+
+/* Pausa animações quando a aba fica oculta */
+document.addEventListener('visibilitychange', () => {
+  const state = document.hidden ? 'paused' : 'running';
+  document.querySelectorAll('[style*="animation"]').forEach(el => {
+    el.style.animationPlayState = state;
+  });
 });
-
-const preloadCriticalResources = () => {
-    const fontLink = document.createElement('link');
-    fontLink.rel = 'preload';
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
-    fontLink.as = 'style';
-    fontLink.crossOrigin = 'anonymous';
-    document.head.appendChild(fontLink);
-};
-
-preloadCriticalResources();
