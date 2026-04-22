@@ -967,6 +967,36 @@ section {
   background: rgba(184, 192, 204, 0.06);
 }
 
+.tech-badge--kotlin {
+  color: #a97bff;
+  border-color: rgba(169, 123, 255, 0.30);
+  background: rgba(169, 123, 255, 0.08);
+}
+
+.tech-badge--android {
+  color: #3ddc84;
+  border-color: rgba(61, 220, 132, 0.30);
+  background: rgba(61, 220, 132, 0.08);
+}
+
+.tech-badge--jsp {
+  color: #f6b84b;
+  border-color: rgba(246, 184, 75, 0.30);
+  background: rgba(246, 184, 75, 0.08);
+}
+
+.tech-badge--github {
+  color: #c9d1d9;
+  border-color: rgba(201, 209, 217, 0.26);
+  background: rgba(201, 209, 217, 0.06);
+}
+
+.tech-badge--spring {
+  color: #6db33f;
+  border-color: rgba(109, 179, 63, 0.30);
+  background: rgba(109, 179, 63, 0.08);
+}
+
 /* Skills */
 .skills-section {
   background: var(--surface);
