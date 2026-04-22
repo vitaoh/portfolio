@@ -6,12 +6,12 @@
 
 class Portfolio {
   constructor() {
-    this.navbar      = document.getElementById('navbar');
-    this.navToggle   = document.getElementById('nav-toggle');
-    this.navMenu     = document.getElementById('nav-menu');
-    this.navLinks    = document.querySelectorAll('.nav-link');
+    this.navbar = document.getElementById('navbar');
+    this.navToggle = document.getElementById('nav-toggle');
+    this.navMenu = document.getElementById('nav-menu');
+    this.navLinks = document.querySelectorAll('.nav-link');
     this.contactForm = document.getElementById('contact-form');
-    this.isMenuOpen  = false;
+    this.isMenuOpen = false;
     this.skillsAnimated = false;
 
     this.init();
@@ -127,13 +127,13 @@ class Portfolio {
 
   /* ── CARROSSEL PRINCIPAL (slides de projeto) ───────────────── */
   setupCarousel() {
-    const track     = document.getElementById('carousel-track');
-    const slides    = document.querySelectorAll('.carousel-slide');
-    const prevBtn   = document.getElementById('carousel-prev');
-    const nextBtn   = document.getElementById('carousel-next');
-    const viewport  = document.getElementById('carousel-viewport');
+    const track = document.getElementById('carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    const viewport = document.getElementById('carousel-viewport');
     const currentEl = document.getElementById('carousel-current');
-    const totalEl   = document.getElementById('carousel-total');
+    const totalEl = document.getElementById('carousel-total');
 
     if (!track || !slides.length) return;
 
@@ -195,7 +195,7 @@ class Portfolio {
       if (!section) return;
       const rect = section.getBoundingClientRect();
       if (rect.top > window.innerHeight || rect.bottom < 0) return;
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); startAutoplay(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); startAutoplay(); }
       if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); startAutoplay(); }
     });
 
@@ -221,18 +221,18 @@ class Portfolio {
   /* ── MINI CARROSSEIS DE IMAGEM ─────────────────────────────── */
   setupImageCarousels() {
     document.querySelectorAll('[data-img-carousel]').forEach(carousel => {
-      const track    = carousel.querySelector('.img-carousel-track');
-      const slides   = carousel.querySelectorAll('.img-carousel-slide');
-      const prevBtn  = carousel.querySelector('.img-carousel-prev');
-      const nextBtn  = carousel.querySelector('.img-carousel-next');
+      const track = carousel.querySelector('.img-carousel-track');
+      const slides = carousel.querySelectorAll('.img-carousel-slide');
+      const prevBtn = carousel.querySelector('.img-carousel-prev');
+      const nextBtn = carousel.querySelector('.img-carousel-next');
       const dotsWrap = carousel.querySelector('.img-dots');
-      const images   = carousel.querySelectorAll('img');
+      const images = carousel.querySelectorAll('img');
 
       if (!track || !slides.length) return;
 
       const total = slides.length;
       let current = 0;
-      let startX  = 0;
+      let startX = 0;
       let loadedCount = 0;
       let imgTimer = null;
 
@@ -249,6 +249,12 @@ class Portfolio {
         }
       }
 
+      // Verifica se o slide de um dado índice contém um GIF
+      const isGif = (index) => {
+        const img = slides[index]?.querySelector('img');
+        return img ? img.src.toLowerCase().endsWith('.gif') : false;
+      };
+
       const goTo = (index) => {
         current = ((index % total) + total) % total;
         track.style.transform = `translateX(-${current * 100}%)`;
@@ -256,17 +262,20 @@ class Portfolio {
           dot.classList.toggle('active', i === current);
           dot.setAttribute('aria-selected', String(i === current));
         });
+        // Se o slide atual for um GIF, pausa o autoplay
+        if (isGif(current)) stopAuto();
       };
 
       // Autoplay interno: troca imagem a cada 3.5 s
       const IMG_DELAY = 3500;
-      const startAuto   = () => { clearInterval(imgTimer); imgTimer = setInterval(() => goTo(current + 1), IMG_DELAY); };
-      const stopAuto    = () => clearInterval(imgTimer);
-      const restartAuto = () => startAuto();
+      const startAuto = () => { clearInterval(imgTimer); imgTimer = setInterval(() => goTo(current + 1), IMG_DELAY); };
+      const stopAuto = () => clearInterval(imgTimer);
+      // Só reinicia o autoplay se o slide atual NÃO for um GIF
+      const restartAuto = () => { if (!isGif(current)) startAuto(); };
 
       // Pausa ao hover
       carousel.addEventListener('mouseenter', stopAuto);
-      carousel.addEventListener('mouseleave', startAuto);
+      carousel.addEventListener('mouseleave', restartAuto);
 
       // Botões prev/next
       if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(current - 1); restartAuto(); });
@@ -383,9 +392,9 @@ class Portfolio {
   validateField(field) {
     const val = field.value.trim();
     const checks = {
-      name:    () => val.length < 2  && 'Nome deve ter pelo menos 2 caracteres',
-      email:   () => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) && 'Por favor, insira um email válido',
-      subject: () => val.length < 3  && 'Assunto deve ter pelo menos 3 caracteres',
+      name: () => val.length < 2 && 'Nome deve ter pelo menos 2 caracteres',
+      email: () => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) && 'Por favor, insira um email válido',
+      subject: () => val.length < 3 && 'Assunto deve ter pelo menos 3 caracteres',
       message: () => val.length < 10 && 'Mensagem deve ter pelo menos 10 caracteres',
     };
     const check = checks[field.name];
@@ -418,7 +427,7 @@ class Portfolio {
   }
 
   async submitForm(data) {
-    const btn  = this.contactForm.querySelector('button[type="submit"]');
+    const btn = this.contactForm.querySelector('button[type="submit"]');
     const orig = btn.innerHTML;
 
     btn.textContent = 'Enviando…';
@@ -429,7 +438,7 @@ class Portfolio {
       await new Promise(r => setTimeout(r, 1000));
 
       const subject = encodeURIComponent(data.subject);
-      const body    = encodeURIComponent(
+      const body = encodeURIComponent(
         `Olá Victor!\n\nNome: ${data.name}\nEmail: ${data.email}\n\nMensagem:\n${data.message}\n\n---\nEnviado pelo portfólio`
       );
       window.location.href = `mailto:herculinvictorr@gmail.com?subject=${subject}&body=${body}`;

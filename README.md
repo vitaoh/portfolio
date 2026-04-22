@@ -1,14 +1,21 @@
 # Portfolio Pessoal - Victor Herculini
 
-Este é o repositório do meu portfólio pessoal, onde apresento minhas principais informações, habilidades e projetos. O site é disponibilizado no arquivo `home.html` e segue uma navegação simples e direta para facilitar a experiência do visitante.
+![Status](https://img.shields.io/badge/status-online-brightgreen)
+
+Este é o repositório do meu portfólio pessoal, onde apresento minhas principais informações, habilidades e projetos.
+
+## 🔗 Visualizar Portfólio
+
+[Clique aqui para acessar](https://victorherculini.vercel.app/)
 
 ## Visão Geral
 
 O portfólio apresenta as seguintes seções em ordem de navegação:
 
-- **Home**: Página principal com destaque para informações pessoais essenciais
+- **Início**: Página principal com destaque para informações pessoais essenciais
 - **Sobre**: Detalhes sobre mim, incluindo habilidades e traços pessoais
-- **Sonho**: Minha visão e objetivos profissionais
+- **Visão**: Minha visão e objetivos profissionais
+- **Projetos**: Seleção dos principais projetos desenvolvidos
 - **Contato**: Formulário para quem deseja entrar em contato diretamente, além das redes sociais
 
 ## Tecnologias Utilizadas
@@ -16,28 +23,24 @@ O portfólio apresenta as seguintes seções em ordem de navegação:
 - **HTML5**: Estruturação do conteúdo
 - **CSS3**: Estilização detalhada com variáveis CSS para suporte a tema claro e escuro
 - **JavaScript**: Para interatividade como navegação responsiva, animações e validação do formulário de contato
+- **Google Fonts**: Tipografia com as fontes Syne e DM Sans
 
 ## Funcionalidades Principais
 
 - Navegação responsiva com menu móvel que fecha automaticamente ao clicar fora ou em links
 - Efeitos de scroll na navbar e atualização dinâmica do link ativo conforme a seção visível
 - Animações utilizando Intersection Observer para uma experiência visual agradável
+- Carrossel de projetos com mini carrossel de imagens por projeto (suporte a GIFs)
 - Formulário de contato com validação em tempo real e envio via redirecionamento para cliente de email
-- Suporte a temas claro e escuro com variáveis CSS para facilitar customização
 - Tipografia e espaçamentos baseados em variáveis CSS para fácil manutenção e acessibilidade
-
-## Como visualizar o portfólio
-
-Para ver o portfólio, basta clicar nesse link.
-<a href="https://victorherculini.vercel.app/" target="_blank">Visualizar portfólio</a>
 
 ## Estrutura dos Arquivos
 
 ```
-├── home.html          # Página principal
+├── index.html         # Página principal
 ├── style.css          # Arquivo CSS
-├── app.js             # Arquivo JavaScript  
-├── pictures/          # Imagens
+├── app.js             # Arquivo JavaScript
+├── pictures/          # Imagens e GIFs dos projetos
 └── README.md          # Este arquivo
 ```
 
