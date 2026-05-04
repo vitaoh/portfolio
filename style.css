@@ -1472,6 +1472,17 @@ section {
   background: #06121a;
 }
 
+.postly-surface {
+  background: linear-gradient(140deg, rgba(8, 8, 28, 0.98) 0%, rgba(130, 60, 220, 0.28) 100%);
+}
+
+/* Imagens portrait (app Android) — igual ao android-surface */
+.postly-surface .img-carousel-slide img {
+  object-fit: contain;
+  object-position: top;
+  background: #0a0614;
+}
+
 /* Botões prev / next do mini carrossel */
 .img-carousel-prev,
 .img-carousel-next {
