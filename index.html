@@ -1,905 +1,508 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Victor Herculini — Desenvolvedor de Software</title>
-  <meta name="description" content="Portfolio de Victor Rodrigues Herculini — Estudante de ADS, IFSP Araraquara">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
-    rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victor Herculini — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&display=swap" rel="stylesheet">
+
+
+
+
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body data-theme="aurora" data-density="normal" data-intensity="bold">
 
-  <!-- ===== BACKGROUND ORBS (animados) ===== -->
-  <div class="bg-orbs" aria-hidden="true">
-    <div class="bg-orb bg-orb--1"></div>
-    <div class="bg-orb bg-orb--2"></div>
-    <div class="bg-orb bg-orb--3"></div>
-    <div class="bg-orb bg-orb--4"></div>
+<!-- ===== AMBIENT FLOATING SHAPES ===== -->
+<div class="float-shape float-shape--1"></div>
+<div class="float-shape float-shape--2"></div>
+<div class="float-shape float-shape--3"></div>
+
+<!-- ===== CUSTOM CURSOR ===== -->
+<div class="cursor" id="cursor"></div>
+
+<!-- ===== SCROLL PROGRESS ===== -->
+<div class="scroll-progress"><div class="scroll-progress__bar" id="progress"></div></div>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="#top" class="nav__logo">Victor Herculini ✱</a>
+      <div class="nav__links">
+        <a href="#about" class="nav__link"><span class="num">01</span>Sobre</a>
+        <a href="#work" class="nav__link"><span class="num">02</span>Trabalhos</a>
+        <a href="#vision" class="nav__link"><span class="num">03</span>Visão</a>
+        <a href="#contact" class="nav__link"><span class="num">04</span>Contato</a>
+      </div>
+      <a href="#contact" class="nav__cta"><span class="nav__cta__dot"></span>Disponível</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="container">
+    <div class="hero__meta">
+      <span class="hero__meta__dot"></span>
+      <span>VH · 001 / Portfolio · 2026</span>
+      <span class="hero__meta__line"></span>
+      <span>São Carlos · SP · BR</span>
+    </div>
+
+    <div class="hero__avatar">
+      <span class="hero__avatar__img"></span>
+      <span class="hero__avatar__pulse"></span>
+      <span>Disponível para estágio</span>
+    </div>
+
+    <h1 class="hero__title" id="heroTitle">
+      <span class="reveal-line"><span>Desenvolvedor</span></span>
+      <span class="reveal-line"><span>de software,</span></span>
+      <span class="reveal-line"><span><em>obcecado</em> pelo progresso.</span></span>
+    </h1>
+
+    <div class="hero__row">
+      <p class="hero__intro reveal">
+        <strong>Victor Rodrigues Herculini</strong> — estudante de ADS no IFSP.
+        Construo software pensando em arquitetura, legibilidade e na experiência de quem usa.
+        Java, Kotlin, JavaScript, Android, MySQL.
+      </p>
+      <div class="hero__side" data-stagger>
+        <div class="hero__side__stat">
+          <span class="hero__side__stat__num">5+</span>
+          <span class="hero__side__stat__label">Projetos entregues</span>
+        </div>
+        <div class="hero__side__stat">
+          <span class="hero__side__stat__num">3+</span>
+          <span class="hero__side__stat__label">Anos estudando</span>
+        </div>
+        <div class="hero__side__stat">
+          <span class="hero__side__stat__num">11</span>
+          <span class="hero__side__stat__label">Stacks dominadas</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar" id="navbar">
-    <div class="container">
-      <div class="nav-content">
-        <a href="#hero" class="nav-logo">VH</a>
-        <ul class="nav-menu" id="nav-menu">
-          <li><a href="#hero" class="nav-link">Início</a></li>
-          <li><a href="#about" class="nav-link">Sobre</a></li>
-          <li><a href="#vision" class="nav-link">Visão</a></li>
-          <li><a href="#projects" class="nav-link">Projetos</a></li>
-          <li><a href="#contact" class="nav-link">Contato</a></li>
-        </ul>
-        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu">
-          <span></span><span></span><span></span>
+  <div class="hero__scroll">
+    <span>scroll</span>
+    <span class="hero__scroll__line"></span>
+  </div>
+</header>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee">
+  <div class="marquee__track">
+    <!-- duplicated 2× for infinite loop -->
+    <span class="marquee__item">Java<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Kotlin<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">JavaScript<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Android<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Python<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">MySQL<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">JSP<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Git<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Linux<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">HTML / CSS<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Clean Code<span class="marquee__item__dot"></span></span>
+    <!-- duplicate -->
+    <span class="marquee__item">Java<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Kotlin<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">JavaScript<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Android<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Python<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">MySQL<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">JSP<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Git<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Linux<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">HTML / CSS<span class="marquee__item__dot"></span></span>
+    <span class="marquee__item">Clean Code<span class="marquee__item__dot"></span></span>
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about" data-screen-label="02 Sobre">
+  <div class="container">
+    <div class="kicker reveal">
+      <span class="kicker__num">01</span>
+      <span class="kicker__line"></span>
+      Sobre
+    </div>
+
+    <div class="about__grid">
+      <div class="about__sticky reveal reveal--left">
+        <div class="about__photo">
+          <img src="pictures/me/mee.png" alt="Victor Herculini" class="about__photo__img">
+          <span class="about__photo__deco"></span>
+          <span class="about__photo__grid-line"></span>
+          <span class="about__photo__grid-line about__photo__grid-line--h"></span>
+          <span class="about__photo__crosshair"></span>
+          <span class="about__photo__seal">VH</span>
+          <span class="about__photo__corner"></span>
+        </div>
+      </div>
+
+      <div>
+        <p class="about__bio" id="aboutBio">
+          <span>Construo</span> <span>software</span> <span class="about__bio__highlight">robusto</span>
+          <span>e</span> <span>orientado</span> <span>a</span>
+          <span>resultados</span><span>.</span> <span>Foco</span>
+          <span>em</span> <span>arquitetura,</span>
+          <span class="about__bio__highlight">clean&nbsp;code</span>
+          <span>e</span> <span>boas</span> <span>práticas</span> <span>de</span>
+          <span>engenharia</span><span>—</span>
+          <span>código</span> <span>que</span> <span>seja</span>
+          <span>legível,</span> <span>escalável</span> <span>e</span>
+          <span>centrado</span> <span>em</span> <span>quem</span>
+          <span>o</span> <span>usa.</span>
+        </p>
+
+        <div class="about__facts">
+          <div class="about__fact"><span class="about__fact__label">Nome</span><span class="about__fact__value">Victor Rodrigues Herculini</span><span class="about__fact__icon">→</span></div>
+          <div class="about__fact"><span class="about__fact__label">Idade</span><span class="about__fact__value">20 anos</span><span class="about__fact__icon">→</span></div>
+          <div class="about__fact"><span class="about__fact__label">Local</span><span class="about__fact__value">São Carlos · SP</span><span class="about__fact__icon">→</span></div>
+          <div class="about__fact"><span class="about__fact__label">Curso</span><span class="about__fact__value">ADS · IFSP</span><span class="about__fact__icon">→</span></div>
+          <div class="about__fact"><span class="about__fact__label">Status</span><span class="about__fact__value" style="color: var(--accent);">Buscando estágio ●</span><span class="about__fact__icon">→</span></div>
+          <div class="about__fact"><span class="about__fact__label">Foco</span><span class="about__fact__value">Back-end · Android · Arquitetura</span><span class="about__fact__icon">→</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section class="skills" data-screen-label="03 Habilidades">
+  <div class="container">
+    <div class="kicker reveal">
+      <span class="kicker__num">02</span>
+      <span class="kicker__line"></span>
+      Habilidades
+    </div>
+    <div class="skills__grid">
+      <div>
+        <h2 class="section-title reveal">O que <em>levo</em><br>pro time.</h2>
+        <p class="section-lead reveal">Mais que sintaxe: comunicação, processo e a obsessão de entregar bem feito.</p>
+      </div>
+      <div class="skills__list">
+        <div class="skill" style="--w: 85%"><div class="skill__head"><span class="skill__name">Lógica de Programação</span><span class="skill__num">085</span></div><div class="skill__bar"><div class="skill__bar__fill"></div></div></div>
+        <div class="skill" style="--w: 90%"><div class="skill__head"><span class="skill__name">Trabalho em Equipe</span><span class="skill__num">090</span></div><div class="skill__bar"><div class="skill__bar__fill"></div></div></div>
+        <div class="skill" style="--w: 88%"><div class="skill__head"><span class="skill__name">Criatividade</span><span class="skill__num">088</span></div><div class="skill__bar"><div class="skill__bar__fill"></div></div></div>
+        <div class="skill" style="--w: 82%"><div class="skill__head"><span class="skill__name">Resolução de Problemas</span><span class="skill__num">082</span></div><div class="skill__bar"><div class="skill__bar__fill"></div></div></div>
+        <div class="skill" style="--w: 87%"><div class="skill__head"><span class="skill__name">Aprendizado Prático</span><span class="skill__num">087</span></div><div class="skill__bar"><div class="skill__bar__fill"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section class="projects" id="work" data-screen-label="04 Projetos">
+  <div class="container">
+    <div class="kicker reveal">
+      <span class="kicker__num">03</span>
+      <span class="kicker__line"></span>
+      Trabalhos selecionados
+    </div>
+    <div class="projects__head">
+      <h2 class="section-title reveal">Projetos em <em>destaque</em>.</h2>
+      <div class="projects__head__nav">
+        <button class="projects__nav-btn" id="prj-prev" aria-label="Anterior" data-cursor="hover">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="projects__nav-btn" id="prj-next" aria-label="Próximo" data-cursor="hover">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
     </div>
-  </nav>
+  </div>
 
-  <!-- ===== HERO ===== -->
-  <section id="hero" class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="container">
-      <div class="hero-content">
+  <div class="projects__strip" id="prjStrip">
 
-        <div class="hero-avatar">
-          <div class="avatar-ring">
-            <img src="pictures/me/me.jpg" alt="Foto de Victor Herculini" class="avatar-photo">
-          </div>
-        </div>
-
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          Disponível para estágio
-        </div>
-
-        <h1 class="hero-title">
-          <span class="typing-text">Victor Rodrigues Herculini</span>
-        </h1>
-        <p class="hero-subtitle">Estudante de ADS &middot; IFSP Araraquara</p>
-        <p class="hero-description">
-          Apaixonado por engenharia de software e inovação.
-          Transformando ideias em código com criatividade e lógica.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn--primary">Ver projetos</a>
-          <a href="#contact" class="btn btn--outline">Entrar em contato</a>
-        </div>
-
-        <div class="hero-social">
-          <a href="https://github.com/vitaoh" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.515.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.635.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-          </a>
-          <a href="https://www.linkedin.com/in/victor-herculini/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-            </svg>
-          </a>
-          <a href="https://www.instagram.com/victorherculini/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-            </svg>
-          </a>
-          <a href="https://twitter.com/vitaorh" target="_blank" rel="noopener" class="social-link" aria-label="Twitter/X">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-            </svg>
-          </a>
-        </div>
-
+    <article class="project reveal reveal--right">
+      <div class="project__cover">
+        <img src="pictures/postly/video.gif" alt="Demonstração do Postly" class="project__cover__img">
+        <span class="project__cover__glow"></span>
+        <div class="project__cover__mock"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="project__cover__label">01 · Android</span>
+        <span class="project__cover__seal">Postly</span>
+        <span class="project__cover__year">2026</span>
       </div>
-    </div>
-  </section>
-
-  <!-- ===== ABOUT ===== -->
-  <section id="about" class="about">
-    <div class="container">
-
-      <div class="section-header fade-in">
-        <h2 class="section-title">Sobre Mim</h2>
-        <p class="section-subtitle">Desenvolvedor focado em soluções práticas e código de qualidade</p>
+      <div class="project__body">
+        <span class="project__cat">Rede social mobile</span>
+        <h3 class="project__title">Postly</h3>
+        <p class="project__desc">Rede social mobile para publicação de conteúdo, interação entre usuários e construção de comunidades — desenvolvida nativamente para Android.</p>
+        <div class="project__tags"><span class="project__tag">Kotlin</span><span class="project__tag">Android</span><span class="project__tag">Firebase</span><span class="project__tag">XML</span></div>
+        <a href="https://github.com/vitaoh/postly-app" target="_blank" rel="noopener" class="project__link" data-cursor="hover">
+          Ver no GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
       </div>
+    </article>
 
-      <div class="about-bio fade-in">
-        <p>
-          Sou Victor, estudante de Análise e Desenvolvimento de Sistemas no IFSP Araraquara, com 20 anos e foco em
-          construir software robusto e orientado a resultados. Ao longo da minha formação, desenvolvi experiência
-          prática com Java, JavaScript, HTML, CSS, MySQL, Python e Android, atuando desde a lógica de negócio no
-          back-end até a construção de interfaces funcionais no front-end.
-          Tenho interesse aprofundado em arquitetura de sistemas, clean code, engenharia de prompt, e boas práticas de
-          engenharia de software,
-          buscando constantemente elevar a qualidade técnica dos projetos em que me envolvo. Acredito que software bem
-          projetado vai além do funcionamento — ele precisa ser legível, escalável e centrado na experiência de quem o
-          usa.
-          Estou em busca de oportunidades para crescer profissionalmente, contribuir com times que valorizam qualidade
-          técnica e continuar evoluindo como desenvolvedor.
-        </p>
+    <article class="project reveal reveal--right">
+      <div class="project__cover">
+        <img src="pictures/guiapocket/demonstracao.gif" alt="Demonstração do Guia Pocket" class="project__cover__img">
+        <span class="project__cover__glow"></span>
+        <div class="project__cover__mock"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="project__cover__label">02 · Android</span>
+        <span class="project__cover__seal">Guia<br>Pocket</span>
+        <span class="project__cover__year">2025</span>
       </div>
-
-      <div class="about-grid">
-        <div class="about-card fade-in">
-          <div class="card-icon">👨‍💻</div>
-          <h3>Informações Pessoais</h3>
-          <div class="info-list">
-            <div class="info-item">
-              <span class="label">Idade</span>
-              <span class="value">20 anos</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Localização</span>
-              <span class="value">São Carlos, SP</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Educação</span>
-              <span class="value">ADS — IFSP Araraquara</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Status</span>
-              <span class="value status-available">Buscando estágio</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="about-card fade-in">
-          <div class="card-icon">🎯</div>
-          <h3>Características</h3>
-          <div class="traits">
-            <span class="trait">Lógico</span>
-            <span class="trait">Criativo</span>
-            <span class="trait">Proativo</span>
-            <span class="trait">Obsessão pelo progresso</span>
-          </div>
-        </div>
-
-        <div class="about-card fade-in">
-          <div class="card-icon">🚀</div>
-          <h3>Interesses</h3>
-          <div class="interests">
-            <span class="interest">Programação</span>
-            <span class="interest">Exercícios físicos</span>
-            <span class="interest">Séries</span>
-            <span class="interest">Jogos</span>
-            <span class="interest">Conexões sociais</span>
-          </div>
-        </div>
+      <div class="project__body">
+        <span class="project__cat">Aplicativo Android</span>
+        <h3 class="project__title">Guia Pocket</h3>
+        <p class="project__desc">Aplicativo Android para guias práticos e consultas rápidas, com navegação intuitiva e acesso offline ao conteúdo.</p>
+        <div class="project__tags"><span class="project__tag">Kotlin</span><span class="project__tag">Android</span><span class="project__tag">XML</span></div>
+        <a href="https://github.com/vitaoh/guia-pocket-app" target="_blank" rel="noopener" class="project__link" data-cursor="hover">
+          Ver no GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
       </div>
+    </article>
 
-      <div class="tech-stack-section fade-in">
-        <h3 class="tech-stack-title">Tecnologias</h3>
-        <div class="tech-badges-grid">
-          <span class="tech-badge tech-badge--java">Java</span>
-          <span class="tech-badge tech-badge--js">JavaScript</span>
-          <span class="tech-badge tech-badge--python">Python</span>
-          <span class="tech-badge tech-badge--html">HTML &amp; CSS</span>
-          <span class="tech-badge tech-badge--mysql">MySQL</span>
-          <span class="tech-badge tech-badge--git">Git</span>
-          <span class="tech-badge tech-badge--linux">Linux</span>
-          <span class="tech-badge tech-badge--kotlin">Kotlin</span>
-          <span class="tech-badge tech-badge--android">Android</span>
-          <span class="tech-badge tech-badge--jsp">JSP</span>
-          <span class="tech-badge tech-badge--github">GitHub</span>
-        </div>
+    <article class="project reveal reveal--right">
+      <div class="project__cover">
+        <img src="pictures/task/tarefas.png" alt="Tela de tarefas do Task Manager" class="project__cover__img">
+        <span class="project__cover__glow"></span>
+        <div class="project__cover__mock"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="project__cover__label">03 · Sistema</span>
+        <span class="project__cover__seal">Task<br>Manager</span>
+        <span class="project__cover__year">2025</span>
       </div>
-
-      <div class="skills-section fade-in">
-        <h3 class="skills-title">Habilidades</h3>
-        <div class="skills-grid">
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Lógica de Programação</span>
-              <span class="skill-percent">85%</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-width="85"></div>
-            </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Trabalho em Equipe</span>
-              <span class="skill-percent">90%</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-width="90"></div>
-            </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Criatividade</span>
-              <span class="skill-percent">88%</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-width="88"></div>
-            </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Resolução de Problemas</span>
-              <span class="skill-percent">82%</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-width="82"></div>
-            </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Aprendizado Prático</span>
-              <span class="skill-percent">87%</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-width="87"></div>
-            </div>
-          </div>
-        </div>
+      <div class="project__body">
+        <span class="project__cat">Sistema web completo</span>
+        <h3 class="project__title">Task Manager</h3>
+        <p class="project__desc">Sistema web para gerenciamento de tarefas com CRUD completo, foco em produtividade e back-end escalável.</p>
+        <div class="project__tags"><span class="project__tag">Java</span><span class="project__tag">JSP</span><span class="project__tag">MySQL</span><span class="project__tag">HTML/CSS</span></div>
+        <a href="https://github.com/vitaoh/task-manager" target="_blank" rel="noopener" class="project__link" data-cursor="hover">
+          Ver no GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
       </div>
+    </article>
 
-    </div>
-  </section>
+    <article class="project reveal reveal--right">
+      <div class="project__cover">
+        <img src="pictures/rededevs/home.png" alt="Tela inicial da RedeDevs" class="project__cover__img">
+        <span class="project__cover__glow"></span>
+        <div class="project__cover__mock"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="project__cover__label">04 · Comunidade</span>
+        <span class="project__cover__seal">Rede<br>Devs</span>
+        <span class="project__cover__year">2025</span>
+      </div>
+      <div class="project__body">
+        <span class="project__cat">Plataforma social</span>
+        <h3 class="project__title">RedeDevs</h3>
+        <p class="project__desc">Plataforma social para conectar desenvolvedores, incentivar interação e fortalecer comunidades técnicas.</p>
+        <div class="project__tags"><span class="project__tag">JavaScript</span><span class="project__tag">HTML</span><span class="project__tag">CSS</span><span class="project__tag">LocalStorage</span></div>
+        <a href="https://github.com/vitaoh/RedeDevsV2" target="_blank" rel="noopener" class="project__link" data-cursor="hover">
+          Ver no GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+    </article>
 
-  <!-- ===== VISION ===== -->
-  <section id="vision" class="vision">
-    <div class="container">
-      <div class="vision-content">
-        <div class="vision-icon">🌟</div>
-        <h2 class="vision-title">Minha Visão</h2>
-        <p class="vision-text">
-          Trabalhar como engenheiro de software para uma rede social inovadora.
-          Acredito que as redes sociais têm um potencial incrível para conectar pessoas
-          e criar comunidades significativas.
-        </p>
-        <div class="vision-goals">
-          <div class="vision-goal fade-in">
-            <div class="goal-icon">💡</div>
-            <h3>Inovação</h3>
-            <p>Criar soluções que transformem a forma como as pessoas se conectam</p>
-          </div>
-          <div class="vision-goal fade-in">
-            <div class="goal-icon">🤝</div>
-            <h3>Conexão</h3>
-            <p>Desenvolver plataformas que aproximem comunidades significativas</p>
-          </div>
-          <div class="vision-goal fade-in">
-            <div class="goal-icon">🚀</div>
-            <h3>Impacto</h3>
-            <p>Contribuir para um futuro digital mais conectado e inclusivo</p>
-          </div>
+    <article class="project reveal reveal--right">
+      <div class="project__cover">
+        <img src="pictures/pokemon/batalha.png" alt="Tela de batalha do Pokémon Showdown" class="project__cover__img">
+        <span class="project__cover__glow"></span>
+        <div class="project__cover__mock"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="project__cover__label">05 · Experimental</span>
+        <span class="project__cover__seal">Pokémon<br>Showdown</span>
+        <span class="project__cover__year">2025</span>
+      </div>
+      <div class="project__body">
+        <span class="project__cat">Interface & lógica</span>
+        <h3 class="project__title">Pokémon Showdown</h3>
+        <p class="project__desc">Projeto experimental para praticar interface, lógica de interação e mecânicas inspiradas em batalhas Pokémon.</p>
+        <div class="project__tags"><span class="project__tag">Java</span></div>
+        <a href="https://github.com/vitaoh/PokemonShowdown" target="_blank" rel="noopener" class="project__link" data-cursor="hover">
+          Ver no GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===== VISION ===== -->
+<section class="vision" id="vision" data-screen-label="05 Visão">
+  <div class="container">
+    <div class="vision__inner">
+      <div class="kicker reveal" style="justify-content: center;">
+        <span class="kicker__num">04</span>
+        <span class="kicker__line"></span>
+        Visão
+      </div>
+      <div class="vision__quote-mark reveal reveal--scale">"</div>
+      <p class="vision__text reveal">
+        Quero ser engenheiro de software<br>
+        em uma rede social que conecta <em>pessoas</em><br>
+        e cria <em>comunidades</em> com propósito.
+      </p>
+      <div class="vision__pillars" data-stagger>
+        <div class="pillar">
+          <span class="pillar__num">001 / Inovação</span>
+          <h3 class="pillar__title">Soluções que transformam.</h3>
+          <p class="pillar__desc">Criar produtos que mudam a forma como as pessoas se conectam — e que pesam menos no dia a dia.</p>
+          <span class="pillar__shape"></span>
+        </div>
+        <div class="pillar">
+          <span class="pillar__num">002 / Conexão</span>
+          <h3 class="pillar__title">Plataformas com propósito.</h3>
+          <p class="pillar__desc">Aproximar comunidades reais — não métricas vazias, mas relações que importam.</p>
+          <span class="pillar__shape"></span>
+        </div>
+        <div class="pillar">
+          <span class="pillar__num">003 / Impacto</span>
+          <h3 class="pillar__title">Futuro mais inclusivo.</h3>
+          <p class="pillar__desc">Contribuir para um digital mais conectado, acessível, e menos hostil — pra todo mundo.</p>
+          <span class="pillar__shape"></span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===== PROJECTS (CAROUSEL) ===== -->
-  <section id="projects" class="projects">
-    <div class="container">
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact" data-screen-label="06 Contato">
+  <div class="container">
+    <div class="kicker reveal">
+      <span class="kicker__num">05</span>
+      <span class="kicker__line"></span>
+      Vamos conversar
+    </div>
+    <h2 class="contact__big reveal">
+      Tem um<br>
+      projeto? <em>Me chama.</em>
+    </h2>
 
-      <div class="section-header fade-in">
-        <span class="section-kicker">Portfólio</span>
-        <h2 class="section-title">Projetos em destaque</h2>
-        <p class="section-subtitle">
-          Uma seleção dos projetos que melhor representam meu trabalho com interfaces, back-end e organização de
-          sistemas.
-        </p>
+    <div class="contact__grid">
+      <div class="contact__channels reveal reveal--left">
+        <a href="mailto:herculinvictorr@gmail.com" class="channel" data-cursor="hover">
+          <span class="channel__label">Email</span>
+          <span class="channel__value">herculinvictorr@gmail.com</span>
+          <span class="channel__arrow">→</span>
+        </a>
+        <a href="tel:+5516997858363" class="channel" data-cursor="hover">
+          <span class="channel__label">Tel</span>
+          <span class="channel__value">(16) 99785-8363</span>
+          <span class="channel__arrow">→</span>
+        </a>
+        <a href="https://github.com/vitaoh" target="_blank" rel="noopener" class="channel" data-cursor="hover">
+          <span class="channel__label">GitHub</span>
+          <span class="channel__value">@vitaoh</span>
+          <span class="channel__arrow">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/victor-herculini/" target="_blank" rel="noopener" class="channel" data-cursor="hover">
+          <span class="channel__label">LinkedIn</span>
+          <span class="channel__value">victor-herculini</span>
+          <span class="channel__arrow">→</span>
+        </a>
+        <a href="https://www.instagram.com/victorherculini/" target="_blank" rel="noopener" class="channel" data-cursor="hover">
+          <span class="channel__label">Instagram</span>
+          <span class="channel__value">@victorherculini</span>
+          <span class="channel__arrow">→</span>
+        </a>
       </div>
 
-      <!-- CAROUSEL PRINCIPAL -->
-      <div class="carousel-wrap">
-
-        <button class="carousel-btn carousel-prev" id="carousel-prev" aria-label="Projeto anterior">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
+      <form class="form reveal reveal--right" id="contactForm" novalidate>
+        <div class="field">
+          <input type="text" id="name" name="name" placeholder=" " required>
+          <label for="name">Nome</label>
+        </div>
+        <div class="field">
+          <input type="email" id="email" name="email" placeholder=" " required>
+          <label for="email">Email</label>
+        </div>
+        <div class="field">
+          <input type="text" id="subject" name="subject" placeholder=" " required>
+          <label for="subject">Assunto</label>
+        </div>
+        <div class="field">
+          <textarea id="message" name="message" placeholder=" " required></textarea>
+          <label for="message">Mensagem</label>
+        </div>
+        <button type="submit" class="form__submit" data-cursor="hover">
+          Enviar mensagem
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
-        <button class="carousel-btn carousel-next" id="carousel-next" aria-label="Próximo projeto">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
-
-        <div class="carousel-viewport" id="carousel-viewport">
-          <div class="carousel-track" id="carousel-track">
-
-            <!-- ═══ SLIDE 1 — Postly ═══ -->
-            <div class="carousel-slide" role="group" aria-label="Projeto 1 de 5">
-              <article class="project-card-carousel">
-
-                <div class="project-image-area postly-surface">
-                  <div class="project-window-dots" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <div class="project-preview-feed" aria-hidden="true">
-                    <div class="feed-card feed-card--hero"></div>
-                    <div class="feed-row"><span></span><span></span></div>
-                    <div class="feed-row"><span></span><span></span></div>
-                  </div>
-                  <span class="project-badge">Rede social</span>
-
-                  <!-- Mini carrossel: 4 imagens -->
-                  <div class="img-carousel" data-img-carousel aria-label="Imagens do Postly">
-                    <div class="img-carousel-viewport">
-                      <div class="img-carousel-track">
-                        <div class="img-carousel-slide">
-                          <img src="pictures/postly/video.gif" alt="Postly – Demonstração" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/postly/feed.jpg" alt="Postly – Feed principal" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/postly/new_post.jpg" alt="Postly – Criar publicação" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/postly/profile.jpg" alt="Postly – Perfil de usuário" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                      </div>
-                    </div>
-                    <button class="img-carousel-prev" aria-label="Imagem anterior">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                      </svg>
-                    </button>
-                    <button class="img-carousel-next" aria-label="Próxima imagem">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                      </svg>
-                    </button>
-                    <div class="img-dots" role="tablist" aria-label="Navegar imagens"></div>
-                  </div>
-                </div>
-
-                <div class="project-content">
-                  <div class="project-top">
-                    <div>
-                      <p class="project-label">Aplicativo Android</p>
-                      <h3 class="project-title">Postly</h3>
-                    </div>
-                    <span class="project-year">2026</span>
-                  </div>
-                  <p class="project-description">
-                    Rede social mobile para publicação de conteúdo, interação entre usuários e construção de comunidades
-                    — desenvolvida nativamente para Android.
-                  </p>
-                  <ul class="project-highlights">
-                    <li>Feed dinâmico com publicações, curtidas e comentários em tempo real.</li>
-                    <li>Tela de criação de posts com suporte a texto e mídia.</li>
-                    <li>Perfil de usuário com histórico de publicações e personalização.</li>
-                  </ul>
-                  <div class="project-tech">
-                    <span class="tech-tag">Kotlin</span>
-                    <span class="tech-tag">Android</span>
-                    <span class="tech-tag">Firebase</span>
-                    <span class="tech-tag">XML</span>
-                  </div>
-                  <div class="project-links">
-                    <a href="https://github.com/vitaoh/postly-app" target="_blank" rel="noopener noreferrer"
-                      class="btn btn--primary btn--sm">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.515.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.635.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                      </svg>
-                      GitHub
-                    </a>
-                    <a href="#contact" class="btn btn--outline btn--sm">Ver detalhes</a>
-                  </div>
-                </div>
-
-              </article>
-            </div><!-- /slide 1 -->
-
-            <!-- ═══ SLIDE 2 — Guia Pocket App ═══ -->
-            <div class="carousel-slide" role="group" aria-label="Projeto 2 de 5" aria-hidden="true">
-              <article class="project-card-carousel">
-
-                <div class="project-image-area android-surface">
-                  <div class="project-window-dots" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <div class="project-preview-card" aria-hidden="true">
-                    <div class="preview-sidebar"></div>
-                    <div class="preview-main">
-                      <div class="preview-line preview-line--lg"></div>
-                      <div class="preview-line preview-line--md"></div>
-                      <div class="preview-grid"><span></span><span></span><span></span></div>
-                    </div>
-                  </div>
-                  <span class="project-badge">Projeto Android</span>
-
-                  <div class="img-carousel" data-img-carousel aria-label="Imagens do Guia Pocket App">
-                    <div class="img-carousel-viewport">
-                      <div class="img-carousel-track">
-                        <div class="img-carousel-slide">
-                          <img src="pictures/guiapocket/demonstracao.gif" alt="Guia Pocket – Demonstração"
-                            loading="lazy" onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/guiapocket/tema-escuro(en).png" alt="Guia Pocket – Tema Escuro (en)"
-                            loading="lazy" onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/guiapocket/tema-claro(pt-BR).png" alt="Guia Pocket – Tema Claro (pt-BR)"
-                            loading="lazy" onerror="this.style.display='none'">
-                        </div>
-                      </div>
-                    </div>
-                    <button class="img-carousel-prev" aria-label="Imagem anterior">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                      </svg>
-                    </button>
-                    <button class="img-carousel-next" aria-label="Próxima imagem">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                      </svg>
-                    </button>
-                    <div class="img-dots" role="tablist" aria-label="Navegar imagens"></div>
-                  </div>
-                </div>
-
-                <div class="project-content">
-                  <div class="project-top">
-                    <div>
-                      <p class="project-label">Aplicativo Android</p>
-                      <h3 class="project-title">Guia Pocket App</h3>
-                    </div>
-                    <span class="project-year">2025</span>
-                  </div>
-                  <p class="project-description">
-                    Aplicativo Android para guias práticos e consultas rápidas, com navegação intuitiva e acesso offline
-                    ao conteúdo.
-                  </p>
-                  <ul class="project-highlights">
-                    <li>Interface nativa Android com navegação fluida entre categorias.</li>
-                    <li>Conteúdo acessível offline com armazenamento local eficiente.</li>
-                    <li>Design limpo e responsivo adaptado para diferentes tamanhos de tela.</li>
-                  </ul>
-                  <div class="project-tech">
-                    <span class="tech-tag">Kotlin</span>
-                    <span class="tech-tag">Android</span>
-                    <span class="tech-tag">XML</span>
-                  </div>
-                  <div class="project-links">
-                    <a href="https://github.com/vitaoh/guia-pocket-app" target="_blank" rel="noopener noreferrer"
-                      class="btn btn--primary btn--sm">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.515.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.635.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                      </svg>
-                      GitHub
-                    </a>
-                    <a href="#contact" class="btn btn--outline btn--sm">Detalhes sobre</a>
-                  </div>
-                </div>
-
-              </article>
-            </div><!-- /slide 2 -->
-
-            <!-- ═══ SLIDE 3 — Task Manager ═══ -->
-            <div class="carousel-slide" role="group" aria-label="Projeto 3 de 5" aria-hidden="true">
-              <article class="project-card-carousel">
-
-                <div class="project-image-area task-surface">
-                  <div class="project-window-dots" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <div class="project-preview-card" aria-hidden="true">
-                    <div class="preview-sidebar"></div>
-                    <div class="preview-main">
-                      <div class="preview-line preview-line--lg"></div>
-                      <div class="preview-line preview-line--md"></div>
-                      <div class="preview-grid"><span></span><span></span><span></span></div>
-                    </div>
-                  </div>
-                  <span class="project-badge">Projeto web</span>
-
-                  <div class="img-carousel" data-img-carousel aria-label="Imagens do Task Manager">
-                    <div class="img-carousel-viewport">
-                      <div class="img-carousel-track">
-                        <div class="img-carousel-slide">
-                          <img src="pictures/task/menu.png" alt="Task Manager – Visão geral" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/task/tarefas.png" alt="Task Manager – Listagem" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/task/add-tarefa.png" alt="Task Manager – Cadastro de tarefa" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/task/categorias.png" alt="Task Manager – Categorias" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                      </div>
-                    </div>
-                    <button class="img-carousel-prev" aria-label="Imagem anterior">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                      </svg>
-                    </button>
-                    <button class="img-carousel-next" aria-label="Próxima imagem">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                      </svg>
-                    </button>
-                    <div class="img-dots" role="tablist" aria-label="Navegar imagens"></div>
-                  </div>
-                </div>
-
-                <div class="project-content">
-                  <div class="project-top">
-                    <div>
-                      <p class="project-label">Sistema completo</p>
-                      <h3 class="project-title">Task Manager</h3>
-                    </div>
-                    <span class="project-year">2025</span>
-                  </div>
-                  <p class="project-description">
-                    Sistema web para gerenciamento de tarefas com foco em produtividade, organização e fluxo completo de
-                    CRUD.
-                  </p>
-                  <ul class="project-highlights">
-                    <li>Cadastro, edição e exclusão de tarefas com interface responsiva.</li>
-                    <li>Integração com banco de dados MySQL e back-end escalável em Java.</li>
-                    <li>Interface objetiva desenvolvida com JSP e CSS customizado.</li>
-                  </ul>
-                  <div class="project-tech">
-                    <span class="tech-tag">Java</span>
-                    <span class="tech-tag">JSP</span>
-                    <span class="tech-tag">MySQL</span>
-                    <span class="tech-tag">HTML</span>
-                    <span class="tech-tag">CSS</span>
-                  </div>
-                  <div class="project-links">
-                    <a href="https://github.com/vitaoh/task-manager" target="_blank" rel="noopener noreferrer"
-                      class="btn btn--primary btn--sm">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.515.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.635.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                      </svg>
-                      GitHub
-                    </a>
-                    <a href="#contact" class="btn btn--outline btn--sm">Solicitar demo</a>
-                  </div>
-                </div>
-
-              </article>
-            </div><!-- /slide 3 -->
-
-            <!-- ═══ SLIDE 4 — RedeDevs ═══ -->
-            <div class="carousel-slide" role="group" aria-label="Projeto 4 de 5" aria-hidden="true">
-              <article class="project-card-carousel">
-
-                <div class="project-image-area rededevs-surface">
-                  <div class="project-window-dots" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <div class="project-preview-feed" aria-hidden="true">
-                    <div class="feed-card feed-card--hero"></div>
-                    <div class="feed-row"><span></span><span></span></div>
-                    <div class="feed-row"><span></span><span></span></div>
-                  </div>
-                  <span class="project-badge">Rede social</span>
-
-                  <div class="img-carousel" data-img-carousel aria-label="Imagens do RedeDevs">
-                    <div class="img-carousel-viewport">
-                      <div class="img-carousel-track">
-                        <div class="img-carousel-slide">
-                          <img src="pictures/rededevs/home.png" alt="RedeDevs – Feed principal" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/rededevs/post.png" alt="RedeDevs – Publicação" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/rededevs/perfil.png" alt="RedeDevs – Perfil de usuário" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/rededevs/cadastro.png" alt="RedeDevs – Cadastro" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                      </div>
-                    </div>
-                    <button class="img-carousel-prev" aria-label="Imagem anterior">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                      </svg>
-                    </button>
-                    <button class="img-carousel-next" aria-label="Próxima imagem">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                      </svg>
-                    </button>
-                    <div class="img-dots" role="tablist" aria-label="Navegar imagens"></div>
-                  </div>
-                </div>
-
-                <div class="project-content">
-                  <div class="project-top">
-                    <div>
-                      <p class="project-label">Comunidade e conexão</p>
-                      <h3 class="project-title">RedeDevs</h3>
-                    </div>
-                    <span class="project-year">2025</span>
-                  </div>
-                  <p class="project-description">
-                    Plataforma social para conectar desenvolvedores, incentivar interação e fortalecer comunidades
-                    técnicas.
-                  </p>
-                  <ul class="project-highlights">
-                    <li>Estrutura orientada a comunidade e colaboração entre devs.</li>
-                    <li>Interface navegável com identidade visual consistente.</li>
-                    <li>Back-end em Java com persistência MySQL e front responsivo.</li>
-                  </ul>
-                  <div class="project-tech">
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">HTML</span>
-                    <span class="tech-tag">CSS</span>
-                    <span class="tech-tag">LocalStorage</span>
-                  </div>
-                  <div class="project-links">
-                    <a href="https://github.com/vitaoh/RedeDevsV2" target="_blank" rel="noopener noreferrer"
-                      class="btn btn--primary btn--sm">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.515.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.635.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                      </svg>
-                      GitHub
-                    </a>
-                    <a href="#contact" class="btn btn--outline btn--sm">Ver detalhes</a>
-                  </div>
-                </div>
-
-              </article>
-            </div><!-- /slide 4 -->
-
-            <!-- ═══ SLIDE 5 — Pokemon Showdown ═══ -->
-            <div class="carousel-slide" role="group" aria-label="Projeto 5 de 5" aria-hidden="true">
-              <article class="project-card-carousel">
-
-                <div class="project-image-area pokemon-surface">
-                  <div class="project-window-dots" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <div class="project-preview-battle" aria-hidden="true">
-                    <div class="battle-top"></div>
-                    <div class="battle-vs">VS</div>
-                    <div class="battle-bottom"></div>
-                    <div class="battle-bar"></div>
-                  </div>
-                  <span class="project-badge">Projeto experimental</span>
-
-                  <div class="img-carousel" data-img-carousel aria-label="Imagens do Pokemon Showdown">
-                    <div class="img-carousel-viewport">
-                      <div class="img-carousel-track">
-                        <div class="img-carousel-slide">
-                          <img src="pictures/pokemon/menu.png" alt="Pokemon Showdown – Tela inicial" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/pokemon/batalha1.png" alt="Pokemon Showdown – Batalha" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/pokemon/batalha2.png" alt="Pokemon Showdown – Batalha" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                        <div class="img-carousel-slide">
-                          <img src="pictures/pokemon/vencedor.png" alt="Pokemon Showdown – Resultado" loading="lazy"
-                            onerror="this.style.display='none'">
-                        </div>
-                      </div>
-                    </div>
-                    <button class="img-carousel-prev" aria-label="Imagem anterior">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                      </svg>
-                    </button>
-                    <button class="img-carousel-next" aria-label="Próxima imagem">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                      </svg>
-                    </button>
-                    <div class="img-dots" role="tablist" aria-label="Navegar imagens"></div>
-                  </div>
-                </div>
-
-                <div class="project-content">
-                  <div class="project-top">
-                    <div>
-                      <p class="project-label">Interface e lógica</p>
-                      <h3 class="project-title">Pokemon Showdown</h3>
-                    </div>
-                    <span class="project-year">2025</span>
-                  </div>
-                  <p class="project-description">
-                    Projeto experimental para praticar interface, lógica de interação e funcionalidades inspiradas em
-                    batalhas Pokémon.
-                  </p>
-                  <ul class="project-highlights">
-                    <li>Exploração de componentes, estados visuais e organização de layout.</li>
-                    <li>Lógica de batalha implementada com JavaScript puro.</li>
-                    <li>Demonstra versatilidade e repertório front-end.</li>
-                  </ul>
-                  <div class="project-tech">
-                    <span class="tech-tag">Java</span>
-                  </div>
-                  <div class="project-links">
-                    <a href="https://github.com/vitaoh/PokemonShowdown" target="_blank" rel="noopener noreferrer"
-                      class="btn btn--primary btn--sm">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.515.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.635.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                      </svg>
-                      GitHub
-                    </a>
-                    <a href="#contact" class="btn btn--outline btn--sm">Ver mais</a>
-                  </div>
-                </div>
-
-              </article>
-            </div><!-- /slide 5 -->
-
-          </div><!-- /.carousel-track -->
-        </div><!-- /.carousel-viewport -->
-
-        <!-- Dots + counter — agora com 5 projetos -->
-        <div class="carousel-footer">
-          <div class="carousel-dots" role="tablist" aria-label="Navegar entre projetos">
-            <button class="carousel-dot active" data-index="0" role="tab" aria-label="Postly"        aria-selected="true"></button>
-            <button class="carousel-dot"        data-index="1" role="tab" aria-label="Guia Pocket"   aria-selected="false"></button>
-            <button class="carousel-dot"        data-index="2" role="tab" aria-label="Task Manager"  aria-selected="false"></button>
-            <button class="carousel-dot"        data-index="3" role="tab" aria-label="RedeDevs"      aria-selected="false"></button>
-            <button class="carousel-dot"        data-index="4" role="tab" aria-label="Pokemon Showdown" aria-selected="false"></button>
-          </div>
-          <div class="carousel-counter" aria-live="polite">
-            <span id="carousel-current">1</span>&nbsp;/&nbsp;<span id="carousel-total">5</span>
-          </div>
-        </div>
-
-      </div><!-- /.carousel-wrap -->
-
+      </form>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===== CONTACT ===== -->
-  <section id="contact" class="contact">
-    <div class="container">
-
-      <div class="section-header fade-in">
-        <h2 class="section-title">Vamos Conversar?</h2>
-        <p class="section-subtitle">Estou disponível para estágio e novos projetos — entre em contato!</p>
-      </div>
-
-      <div class="contact-grid">
-
-        <div class="contact-info fade-in">
-          <h3>Informações de Contato</h3>
-
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-            </div>
-            <div class="contact-details">
-              <span class="contact-label">Email</span>
-              <a href="mailto:vrherculini@gmail.com" class="contact-value">vrherculini@gmail.com</a>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 011 1.18 2 2 0 013 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path>
-              </svg>
-            </div>
-            <div class="contact-details">
-              <span class="contact-label">Telefone</span>
-              <a href="tel:+5516997858363" class="contact-value">(16) 99785-8363</a>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </div>
-            <div class="contact-details">
-              <span class="contact-label">Localização</span>
-              <span class="contact-value">São Carlos, SP</span>
-            </div>
-          </div>
-        </div>
-
-        <form class="contact-form" id="contact-form" novalidate>
-          <div class="form-group">
-            <label for="name" class="form-label">Nome</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="Seu nome completo"
-              autocomplete="name" required>
-          </div>
-          <div class="form-group">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="seu@email.com"
-              autocomplete="email" required>
-          </div>
-          <div class="form-group">
-            <label for="subject" class="form-label">Assunto</label>
-            <input type="text" id="subject" name="subject" class="form-control"
-              placeholder="Proposta de estágio / Colaboração" required>
-          </div>
-          <div class="form-group">
-            <label for="message" class="form-label">Mensagem</label>
-            <textarea id="message" name="message" class="form-control" rows="5"
-              placeholder="Olá Victor, gostaria de..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn--primary btn--full-width">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13"></line>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
-            Enviar Mensagem
-          </button>
-        </form>
-
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <span>© 2026 · Victor Rodrigues Herculini · São Carlos, BR</span>
+      <div class="footer__social">
+        <a href="https://github.com/vitaoh" target="_blank" rel="noopener" data-cursor="hover">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/victor-herculini/" target="_blank" rel="noopener" data-cursor="hover">LinkedIn ↗</a>
+        <a href="https://www.instagram.com/victorherculini/" target="_blank" rel="noopener" data-cursor="hover">Instagram ↗</a>
       </div>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <p>&copy; 2026 Victor Rodrigues Herculini. Todos os direitos reservados.</p>
-        <div class="footer-social">
-          <a href="https://github.com/vitaoh" target="_blank" class="social-link" aria-label="GitHub">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.515.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.635.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-          </a>
-          <a href="https://www.linkedin.com/in/victor-herculini/" target="_blank" class="social-link" aria-label="LinkedIn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-            </svg>
-          </a>
-          <a href="https://www.instagram.com/victorherculini/" target="_blank" class="social-link" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-            </svg>
-          </a>
-        </div>
-      </div>
+<!-- ===== TWEAKS PANEL (toggled by host or fallback button) ===== -->
+<button class="tweaks-toggle" id="tweaksToggle" aria-label="Abrir Tweaks" data-cursor="hover">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+</button>
+
+<div class="tweaks" id="tweaks">
+  <div class="tweaks__head">
+    <span class="tweaks__title">Tweaks</span>
+    <button class="tweaks__close" id="tweaksClose" aria-label="Fechar">✕</button>
+  </div>
+
+  <div class="tweaks__group">
+    <span class="tweaks__label">Direção estética</span>
+    <div class="tweaks__row tweaks__row--themes">
+      <button class="tweaks__swatch tweaks__swatch--aurora" data-tweak="theme" data-value="aurora">Aurora</button>
+      <button class="tweaks__swatch tweaks__swatch--noir" data-tweak="theme" data-value="noir">Noir</button>
+      <button class="tweaks__swatch tweaks__swatch--mono" data-tweak="theme" data-value="mono">Mono</button>
     </div>
-  </footer>
+  </div>
 
-  <script src="app.js"></script>
+  <div class="tweaks__group">
+    <span class="tweaks__label">Densidade</span>
+    <div class="tweaks__row">
+      <button class="tweaks__btn" data-tweak="density" data-value="compact">Compacto</button>
+      <button class="tweaks__btn" data-tweak="density" data-value="normal">Normal</button>
+      <button class="tweaks__btn" data-tweak="density" data-value="loose">Solto</button>
+    </div>
+  </div>
+
+  <div class="tweaks__group">
+    <span class="tweaks__label">Intensidade dos efeitos</span>
+    <div class="tweaks__row">
+      <button class="tweaks__btn" data-tweak="intensity" data-value="subtle">Sutil</button>
+      <button class="tweaks__btn" data-tweak="intensity" data-value="normal">Normal</button>
+      <button class="tweaks__btn" data-tweak="intensity" data-value="bold">Ousado</button>
+    </div>
+  </div>
+
+  <div class="tweaks__group">
+    <span class="tweaks__label">Layout dos projetos</span>
+    <div class="tweaks__row">
+      <button class="tweaks__btn" data-tweak="projectsLayout" data-value="horizontal">Carrossel</button>
+      <button class="tweaks__btn" data-tweak="projectsLayout" data-value="grid">Grid</button>
+      <button class="tweaks__btn" data-tweak="projectsLayout" data-value="list">Lista</button>
+    </div>
+  </div>
+
+  <div class="tweaks__group">
+    <span class="tweaks__label">Cursor customizado</span>
+    <div class="tweaks__row">
+      <button class="tweaks__btn" data-tweak="cursor" data-value="true">Ativo</button>
+      <button class="tweaks__btn" data-tweak="cursor" data-value="false">Off</button>
+    </div>
+  </div>
+</div>
+
+
+  <script src="app.js" defer></script>
 </body>
-
 </html>
+
